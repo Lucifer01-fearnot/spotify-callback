@@ -3,17 +3,12 @@
 <head><title>Spotify Auth</title></head>
 <body>
 <script>
-  const hash = window.location.hash.substring(1);
-  const params = new URLSearchParams(hash);
-  const token = params.get('access_token');
-  if (token) {
-    // send token to extension via localStorage then close
-    localStorage.setItem('spotify_token', token);
-    window.opener?.postMessage({ type: 'SPOTIFY_TOKEN', token }, '*');
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) {
     document.body.innerText = 'Authenticated! You can close this tab.';
-    setTimeout(() => window.close(), 1000);
   } else {
-    document.body.innerText = 'No token found.';
+    document.body.innerText = 'No code found.';
   }
 </script>
 </body>
