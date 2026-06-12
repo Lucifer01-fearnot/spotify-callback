@@ -5,11 +5,7 @@
 <script>
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-  if (code) {
-    document.body.innerText = 'Authenticated! You can close this tab.';
-  } else {
-    document.body.innerText = 'No code found.';
-  }
+  document.body.innerText = code ? 'Authenticated! Closing...' : 'No code found.';
 </script>
 </body>
 </html>
