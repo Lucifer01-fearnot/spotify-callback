@@ -5,7 +5,14 @@
 <script>
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-  document.body.innerText = code ? 'Authenticated! Closing...' : 'No code found.';
+  if (code) {
+    const EXTENSION_ID = 'liepaifgmabincjpplolkdanbjahedpi';
+    chrome.runtime.sendMessage(EXTENSION_ID, { type: 'SPOTIFY_CODE', code }, () => {
+      document.body.innerText = 'Connected! You can close this tab.';
+    });
+  } else {
+    document.body.innerText = 'No code found.';
+  }
 </script>
 </body>
 </html>
